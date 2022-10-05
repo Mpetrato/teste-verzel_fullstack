@@ -1,11 +1,12 @@
 import { Routes, Route  } from "react-router-dom";
-import { LoginPage } from "../pages/login";
+import { CarrosPage } from "../pages/CarrosPage";
+import { LoginPage } from "../pages/LoginPage";
 
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/login/register" element={<LoginPage />} />
+      <Route path="/:login" element={<LoginPage />} />
+      <Route path="/carros" element={<CarrosPage />} />
       
       <Route path="*" element={<p>Login</p>} />
     </Routes>

@@ -17,7 +17,7 @@ export const Login = () => {
                     Login
                 </C.Button>
             </C.Form>
-            <span>Ainda não tem uma conta? <a href="/login/register">Cadastre-se!</a></span>
+            <span>Ainda não tem uma conta? <a href="/register">Cadastre-se!</a></span>
         </C.Container>
     )
 }

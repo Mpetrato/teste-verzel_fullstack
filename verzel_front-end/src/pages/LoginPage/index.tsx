@@ -16,7 +16,7 @@ export const LoginPage = () => {
                 {pathname === 'login' && (
                     <Login />
                 )}
-                {pathname === 'loginregister' && (
+                {pathname === 'register' && (
                     <Register />
                 )}
             </C.RightContainer>
