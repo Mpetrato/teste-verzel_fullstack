@@ -11,14 +11,14 @@ export const BoxShadowWrapper = styled.div`
     border-radius: 6px;
 `
 
-export const ImageWrapper = styled.div`
-    background-color: #FFF;
+export const ImageWrapper = styled.div<{image: string}>`
+    background-image: url(${props => props.image});
+    background-position: center;
+    background-size: cover;
     border-radius: 6px 6px 0 0;
-    
-    & > img {
-        width: 100%;
-        border-radius: 6px 6px 0 0;
-    }
+    width: 100%;
+    height: 200px;
+
 `
 
 export const ContentWrapper = styled.div`
@@ -48,5 +48,33 @@ export const CarInfo = styled.div`
     & > span {
         font-size: 12px;
         color: #8b8c99;
+    }
+`
+
+export const ButtonsWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+
+    & > button {
+        width: 100%;
+        padding: 5px;
+        font-size: 14px;
+        text-transform: uppercase;
+        background-color: #000;
+        border: 1px solid #000;
+        color: #FFF;
+        font-weight: 500;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: all .3s ease;
+    }
+
+    & > button:hover {
+        background-color: #fff;
+        color: #000;
+        border: 1px solid #000;
     }
 `

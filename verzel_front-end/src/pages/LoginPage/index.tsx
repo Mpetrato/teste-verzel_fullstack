@@ -1,12 +1,19 @@
 import * as C from './styles'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Login } from '../../components/Login';
 import { Register } from '../../components/Register';
+import { useEffect } from 'react';
 
 export const LoginPage = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const pathname = location.pathname.replaceAll('/', '');
-    console.log(pathname)
+
+    useEffect(() => {
+        pathname !== 'login' && pathname !== 'register'
+        ? navigate('/')
+        : ''
+    }, [])
 
     return (
         <C.Container>

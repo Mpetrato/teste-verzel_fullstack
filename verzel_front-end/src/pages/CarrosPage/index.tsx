@@ -1,39 +1,38 @@
-import { ChangeEvent, useEffect, useMemo, useState } from 'react'
+import { ChangeEvent, useContext, useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { CarCard } from '../../components/CarCard'
 import { Header } from '../../components/Header'
+import { AuthContext } from '../../context/authContext'
+import { Api } from '../../services/api'
+import { TCar } from '../../types'
 import * as C from './styles'
 
-type TCarList = {
-    id: number 
-    name: string; 
-    model: string; 
-    brand: string; 
-    image: string;
-    created_at: string;
-    price: number; 
-    km: string; 
-    car_year: string;
-}
 
 export const CarrosPage = () => {
     const [filterParams, setFilterParams] = useSearchParams();
     const [filters, setFilters] = useState(filterParams.get('filter') || '');
-    const [carList, setCarList] = useState<TCarList[]>([
-        {id: 2, name: 'civic', model: 'civic', brand: 'honda', image: 'https://images.kavak.services/images/203442/EXTERIOR-frontSidePilotNear-1663594141840.jpeg?d=756x434', created_at: '0000-00-00 00:00:00', price: 55000, km: '2000', car_year: '2021'},
-        {id: 2, name: 'civic', model: 'civic', brand: 'honda', image: 'https://images.kavak.services/images/203442/EXTERIOR-frontSidePilotNear-1663594141840.jpeg?d=756x434', created_at: '0000-00-00 00:00:00', price: 54000, km: '2000', car_year: '2022'},
-        {id: 2, name: 'civic', model: 'civic', brand: 'honda', image: 'https://images.kavak.services/images/203442/EXTERIOR-frontSidePilotNear-1663594141840.jpeg?d=756x434', created_at: '0000-00-00 00:00:00', price: 53000, km: '2000', car_year: '2023'},
-        {id: 2, name: 'civic', model: 'civic', brand: 'honda', image: 'https://images.kavak.services/images/203442/EXTERIOR-frontSidePilotNear-1663594141840.jpeg?d=756x434', created_at: '0000-00-00 00:00:00', price: 58000, km: '2000', car_year: '2019'},
-        {id: 2, name: 'civic', model: 'civic', brand: 'honda', image: 'https://images.kavak.services/images/203442/EXTERIOR-frontSidePilotNear-1663594141840.jpeg?d=756x434', created_at: '0000-00-00 00:00:00', price: 58000, km: '2000', car_year: '2020'}
-    ]);
-
+    const [carList, setCarList] = useState<TCar[]>([]);
 
     const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
         setFilterParams({ filter: e.target.value}, { replace: true })
         setFilters(e.target.value)
     }
 
+    useEffect(() => {
+        const getCars = async () => {
+            try{
+                const response = await Api.getAllCars()
+                setCarList(response)
+            }catch(err){
+                console.log(err)
+            }
+        }
+        getCars();
+    }, [])
+    
+    
+    // SWITCH FOR FILTER FUNCTIONS    
     useEffect(() => {
         switch(filters) {
             case 'maior-preco': 
@@ -82,7 +81,7 @@ export const CarrosPage = () => {
                 break
             case 'menor-km': 
                 const newArray4 = carList.sort((a, b) => {
-                    if(a.km < b.km) {
+                    if(a.km > b.km) {
                         return -1
                     }else {
                         return 1;
@@ -104,9 +103,11 @@ export const CarrosPage = () => {
                 break
             default:
                 console.log('sorry')
-        }
+            }
     },[filters])
 
+        
+        
     return (
         <C.Container>
             <Header />
@@ -120,6 +121,7 @@ export const CarrosPage = () => {
                     <C.SelectContainer>
                         <span>Ordernar:</span>
                         <select defaultValue={filterParams.get('filter') || ''} onChange={handleChangeSelect}>
+                            <option value='default'>Mais Relevantes</option>
                             <option value="maior-preco">Maior Preço</option>
                             <option value="menor-preco">Menor Preço</option>
                             <option value="mais-antigo">Mais Antigos</option>
@@ -131,6 +133,10 @@ export const CarrosPage = () => {
                 </C.HeaderCarContainer>
 
                 <C.CarListContainer>
+                    { carList.length === 0 && (
+                        <div>Não há carros cadastrados!</div>
+                    )}
+
                     {carList.map((car, index) => (
                         <CarCard key={index} car={car}/>
                     ))}

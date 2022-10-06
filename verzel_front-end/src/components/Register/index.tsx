@@ -1,9 +1,10 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { Api } from '../../services/api';
-import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import * as C from './styles'
 
 export const Register = () => {
+    const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         username: '',
         email: '',
@@ -18,7 +19,14 @@ export const Register = () => {
     const handleSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
         const { confirm_pass, ...rest} = inputs
-        Api.Login({ rest })
+        
+        try {
+            Api.Register({ rest })
+            navigate('/login')    
+        }catch(err) {
+            console.log(err)
+        }
+
     }
     
     console.log(inputs)
