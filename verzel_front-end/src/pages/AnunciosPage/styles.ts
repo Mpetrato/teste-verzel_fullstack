@@ -15,6 +15,8 @@ export const AnunciosWrapper = styled.div`
 `
 
 export const ContentWrapper = styled.div`
+    display: flex;
+    flex-wrap: wrap;
     border-top: 1px solid #CCC;
     width: 100%;
 `

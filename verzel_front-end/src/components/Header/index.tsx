@@ -23,7 +23,7 @@ export const Header = () => {
                         <span>{currentUser?.username}</span>
                     </C.UserWrapper>
                 )}
-                <button>ANUNCIAR</button>
+                <a href='/criar-anuncio'>ANUNCIAR</a>
             </C.RightContainer>
         </C.Container>
     )

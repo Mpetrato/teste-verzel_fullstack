@@ -1,9 +1,8 @@
-import { ChangeEvent, useContext, useEffect, useMemo, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { CarCard } from '../../components/CarCard'
 import { Header } from '../../components/Header'
-import { AuthContext } from '../../context/authContext'
 import { Api } from '../../services/api'
 import { TCar } from '../../types'
 import * as C from './styles'

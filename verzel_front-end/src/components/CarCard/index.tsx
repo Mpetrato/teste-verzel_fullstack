@@ -1,8 +1,6 @@
 import * as C from './styles'
 import axios from 'axios'
 import { useCookies } from 'react-cookie'
-import { formatRelative, subDays } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
 import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/authContext'
@@ -24,18 +22,17 @@ interface CarCardProps  {
 
 
 export const CarCard = ({ car }: CarCardProps) => {
+    const [isAdsUser, setIsAdsUser] = useState(false);
     const { brand, car_year, created_at, id, image, km, model, name, price } = car
     const { currentUser } = useContext(AuthContext)
     const uid = currentUser?.id 
     const [cookies, setCookie, removeCookie] = useCookies(['access_token'])
     const [token, setToken] = useState('')
-
-    const [isAdsUser, setIsAdsUser] = useState(false);
-    const navigate = useNavigate();
-
-    const DateNow = new Date();
+    
     const brlPrice = price.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});
-    const newDate = formatRelative(subDays(DateNow, 0), new Date(), { locale: ptBR}) 
+
+    
+    const navigate = useNavigate();
     const pathname = location.pathname.replaceAll('/', '');
 
     useEffect(() => {
@@ -48,8 +45,9 @@ export const CarCard = ({ car }: CarCardProps) => {
     }
 
     const handleDeleteAds = async () => {
-        const response = await axios.delete('http://localhost:3306/api/cars/6', { data: { uid, token }});
-        console.log(response)
+        const response = await axios.delete(`http://localhost:3306/api/cars/${id}`, { data: { uid, token }});
+        console.log(response.data)
+        location.reload()
     }
 
     return (
@@ -67,7 +65,7 @@ export const CarCard = ({ car }: CarCardProps) => {
                         <span>{car_year}</span>
                         <span>{km}km</span>
                     </C.CarInfo>
-                    {newDate}
+                    {created_at}
                 </C.ContentWrapper>
                 { isAdsUser && (
                     <C.ButtonsWrapper>

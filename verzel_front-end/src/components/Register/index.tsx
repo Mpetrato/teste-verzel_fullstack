@@ -28,8 +28,7 @@ export const Register = () => {
         }
 
     }
-    
-    console.log(inputs)
+
 
     return (
         <C.Container>
@@ -52,7 +51,7 @@ export const Register = () => {
                     <input type="password" id='confirm_pass' name='confirm_pass' placeholder='Confirme sua senha' onChange={handleChange} />
                 </C.InputWrapper>
                 <C.Button onClick={handleSubmit}>
-                    Login
+                    Registrar
                 </C.Button>
             </C.Form>
             <span>Já possui uma conta?<a href="/login">Faça seu login!</a></span>

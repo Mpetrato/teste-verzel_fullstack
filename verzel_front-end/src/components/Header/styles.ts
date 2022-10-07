@@ -36,7 +36,7 @@ export const RightContainer = styled.div`
         color: #00000099;
     }
 
-    & > button {
+    & > a {
         padding: 10px 20px;
         border: 1px solid #000;
         background-color: #000;
@@ -48,7 +48,7 @@ export const RightContainer = styled.div`
         cursor: pointer;
         transition: all .3s ease;
     }
-    & > button:hover {
+    & > a:hover {
         background-color: #fff;
         color: #000;
         border: 1px solid #000;
