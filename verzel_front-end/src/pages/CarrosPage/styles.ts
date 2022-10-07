@@ -12,6 +12,13 @@ export const HeaderCarContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+
+    @media (max-width: 425px) { 
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
 `
 
 export const HeaderInfo = styled.div `
@@ -41,4 +48,11 @@ export const SelectContainer = styled.div`
 export const CarListContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
+
+
+    @media (max-width: 425px) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 `

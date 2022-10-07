@@ -30,7 +30,6 @@ export const CarrosPage = () => {
         getCars();
     }, [])
     
-    
     // SWITCH FOR FILTER FUNCTIONS    
     useEffect(() => {
         switch(filters) {
@@ -101,7 +100,7 @@ export const CarrosPage = () => {
                 setCarList([...newArray5])
                 break
             default:
-                console.log('sorry')
+                return
             }
     },[filters])
 
@@ -136,6 +135,8 @@ export const CarrosPage = () => {
                         <div>Não há carros cadastrados!</div>
                     )}
 
+
+                    
                     {carList.map((car, index) => (
                         <CarCard key={index} car={car}/>
                     ))}
