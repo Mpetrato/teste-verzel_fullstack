@@ -11,7 +11,7 @@ uuid <br />
 aws <br />
 
 
-Back end feito com Node usando banco de dados mysql hospedado na AWS RDS. <br />
+Back end feito com Node usando banco de dados mysql hospedado na AWS RDS, autenticação e token jwt. <br />
 Deixei o arquivo .env com informações para o avaliador conectar ao banco com algum gerenciador de banco de dados.
 
 Como usar BACKEND
@@ -103,7 +103,7 @@ Como usar FRONTEND
 4. npm run dev
 
 
-## BACKEND Endpoints:
+## FRONTEND Endpoints:
 
 ### `/:login`
 
