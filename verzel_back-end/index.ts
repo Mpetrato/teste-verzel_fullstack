@@ -1,8 +1,8 @@
 import express from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
-import authRoutes from './routes/auth'
-import carRoutes from './routes/cars'
+import authRoutes from './src/routes/auth'
+import carRoutes from './src/routes/cars'
 
 
 
